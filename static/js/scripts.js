@@ -93,9 +93,9 @@ function validarCodigo() {
 
     const resultadoDiv = document.getElementById('resultado');
     if (errores.length === 0) {
-        resultadoDiv.innerHTML = '<p>El código es válido.</p>';
+        
     } else {
-        resultadoDiv.innerHTML = `<p>Se encontraron errores:</p><ul>${errores.map(error => `<li>${error}</li>`).join('')}</ul>`;
+        resultadoDiv.innerHTML = `<p>Se encontraron validaciones:</p><ul>${errores.map(error => `<li>${error}</li>`).join('')}</ul>`;
     }
 }
 
