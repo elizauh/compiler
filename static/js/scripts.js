@@ -87,7 +87,7 @@ function validarCodigo() {
             }
         }
         if (!matched) {
-            errores.push(`Error en línea ${i + 1}: ${lines[i]}`);
+            errores.push(`validado en línea ${i + 1}: ${lines[i]}`);
         }
     }
 
