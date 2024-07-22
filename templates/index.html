@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Compiler Analysis</title>
+    <link rel="stylesheet" href="/static/css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/codemirror.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/theme/dracula.min.css">
+    <style>
+        /* Estilos específicos para el textarea */
+        textarea#codeInput {
+            width: 100%;
+            height: 300px; /* Altura ajustada para mostrar varias líneas de código */
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+            margin-bottom: 10px;
+            text-align: left; /* Alinea el texto a la izquierda */
+        }
+
+        /* Estilos generales */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        form {
+            margin-bottom: 20px;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        #results {
+            margin-top: 20px;
+        }
+
+        /* Estilos específicos para CodeMirror */
+        .CodeMirror {
+            height: auto;
+            border: 1px solid #ddd;
+        }
+
+        .CodeMirror-scroll {
+            height: auto;
+            overflow-y: hidden;
+        }
+
+        .CodeMirror pre {
+            padding: 10px 0;
+            line-height: 1.6;
+            font-size: 16px;
+        }
+
+        /* Estilos para la validación de código */
+        #line-numbers {
+            display: inline-block;
+            vertical-align: top;
+            text-align: right;
+            padding-right: 10px;
+            user-select: none;
+        }
+
+        #codigo {
+            display: inline-block;
+            width: calc(100% - 50px);
+            vertical-align: top;
+        }
+
+        #resultado {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Compiler Analysis Tool</h1>
+        <form id="codeForm">
+            <textarea id="codeInput" name="code" rows="10"  placeholder="Ingrese su codigo aqui..."></textarea>
+            <button type="submit">Analyze</button>
+            <button type="button" onclick="validarCodigo()">Validar Código</button>
+        </form>
+        <div id="results">
+            <h2>Results</h2>
+            <div id="tokens"></div>
+            <div id="wordCount"></div>
+            <div id="words"></div>
+            <div id="parseTree"></div>
+            <div id="semanticErrors"></div>
+            <div id="reservedWords"></div>
+        </div>
+        <div id="resultado"></div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/codemirror.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/mode/python/python.min.js"></script>
+    <script>
+        var editor = CodeMirror.fromTextArea(document.getElementById('codeInput'), {
+            mode: 'python',
+            theme: 'dracula',
+            lineNumbers: true,
+            indentUnit: 4,
+            tabMode: 'indent',
+            matchBrackets: true
+        });
+    </script>
+    <script src="/static/js/scripts.js"></script>
+</body>
+</html>
