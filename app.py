@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request, jsonify
 from analysis import count_words_in_tokens, lexical_analysis, syntactic_analysis, semantic_analysis, find_reserved_words, graph_to_json
+import os
 
 app = Flask(__name__)
 
@@ -27,4 +28,5 @@ def analyze():
     })
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    port = int(os.environ.get('PORT', 5000))
+    app.run(host='0.0.0.0', port=port, debug=True)
