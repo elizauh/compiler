@@ -6,7 +6,6 @@
     <title>Compiler Analysis</title>
     <link rel="stylesheet" href="/static/css/styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/codemirror.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/theme/dracula.min.css">
     <style>
         /* Estilos específicos para el textarea */
         textarea#codeInput {
@@ -82,6 +81,10 @@
             font-size: 16px;
         }
 
+        .cm-keyword {
+            color: #ff4500;
+        }
+
         /* Estilos para la validación de código */
         #line-numbers {
             display: inline-block;
@@ -108,10 +111,14 @@
         <form id="codeForm">
             <textarea id="codeInput" name="code" rows="10"  placeholder="Ingrese su codigo aqui..."></textarea>
             <button type="submit">Analyze</button>
+            <button type="button" onclick="executeCode()">Ejecutar Código</button>
             <button type="button" onclick="validarCodigo()">Validar Código</button>
         </form>
+        
         <div id="results">
             <h2>Results</h2>
+            <div id="execution_output"></div>
+            <div id="execution_error"></div>
             <div id="tokens"></div>
             <div id="wordCount"></div>
             <div id="words"></div>
@@ -126,12 +133,28 @@
     <script>
         var editor = CodeMirror.fromTextArea(document.getElementById('codeInput'), {
             mode: 'python',
-            theme: 'dracula',
             lineNumbers: true,
             indentUnit: 4,
             tabMode: 'indent',
             matchBrackets: true
         });
+
+        // Function to highlight reserved words
+        function highlightReservedWords() {
+            const reservedWords = new Set(CodeMirror.modes.python.keywords);
+            const doc = editor.getDoc();
+            const cursor = doc.getSearchCursor(/\b(\w+)\b/g);
+
+            while (cursor.findNext()) {
+                const word = cursor.match[1];
+                if (reservedWords.has(word)) {
+                    doc.markText(cursor.from(), cursor.to(), { className: 'cm-keyword' });
+                }
+            }
+        }
+
+        editor.on('change', highlightReservedWords);
+        highlightReservedWords();
     </script>
     <script src="/static/js/scripts.js"></script>
 </body>

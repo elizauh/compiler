@@ -103,4 +103,3 @@ def count_words_in_tokens(tokens):
     words = [token for token in tokens if token.isalpha()]
     word_count = len(words)
     return word_count, words
-
