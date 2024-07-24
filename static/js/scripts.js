@@ -40,10 +40,10 @@ async function executeCode() {
     const result = await response.json();
     console.log('Result:', result); // Log result to check structure
 
-    
-        document.getElementById('execution_output').innerHTML = `<h3>Resultado de ejecución</h3><p>${await result.execution_output}</p>`;
-        document.getElementById('execution_error').innerHTML = `<h3>Errores en la ejecución</h3><p>${await result.execution_error}</p>`;
-    
+
+    document.getElementById('exect').innerHTML = `<h3>Resultado de ejecución</h3><p>${await result.execution_output}</p>`;
+    document.getElementById('execut').innerHTML = `<h3>Errores en la ejecución</h3><p>${await result.execution_error}</p>`;
+
 }
 
 function displayResults(result) {
